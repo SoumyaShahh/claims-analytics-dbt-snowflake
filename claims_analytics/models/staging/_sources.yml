@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: synthea_raw
+    description: "Raw Synthea synthetic healthcare data loaded into Snowflake from CSV files."
+    database: CLAIMS_DB
+    schema: RAW
+    tables:
+      - name: raw_patients
+        identifier: RAW_PATIENTS
+      - name: raw_encounters
+        identifier: RAW_ENCOUNTERS
+      - name: raw_claims
+        identifier: RAW_CLAIMS
+      - name: raw_conditions
+        identifier: RAW_CONDITIONS
+      - name: raw_providers
+        identifier: RAW_PROVIDERS
+      - name: raw_organizations
+        identifier: RAW_ORGANIZATIONS
+      - name: raw_payers
+        identifier: RAW_PAYERS
+      - name: raw_payer_transitions
+        identifier: RAW_PAYER_TRANSITIONS

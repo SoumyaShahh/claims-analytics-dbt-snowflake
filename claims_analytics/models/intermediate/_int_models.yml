@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: int_patients_enriched
+    description: "Patients with derived demographics (age bands, Medicare eligibility, out-of-pocket)."
+    columns:
+      - name: patient_id
+        tests: [unique, not_null]
+
+  - name: int_claims_with_encounters
+    description: "Claims joined to their associated encounter for cost and service context."
+    columns:
+      - name: claim_id
+        tests: [unique, not_null]
+
+  - name: int_patient_chronic_conditions
+    description: "Patient-level chronic condition flags and complexity score. Grain: one row per patient (filtered to those with conditions)."
+    columns:
+      - name: patient_id
+        description: "Patient identifier. Not tested for uniqueness here — tested on dim_patients downstream."
+      - name: chronic_condition_count
+        description: "Count of tracked chronic conditions this patient has."

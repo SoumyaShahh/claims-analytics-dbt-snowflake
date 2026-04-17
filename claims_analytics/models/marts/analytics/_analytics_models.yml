@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: mart_member_cost_summary
+    description: "Per-member lifetime cost summary with decile ranking. One row per patient."
+    columns:
+      - name: patient_id
+        tests: [unique, not_null]
+      - name: cost_decile
+        description: "1 = highest spenders, 10 = lowest."
+
+  - name: mart_provider_performance
+    description: "Provider scorecard: claims volume, avg cost, outstanding rates."
+    columns:
+      - name: provider_id
+        tests: [unique, not_null]
+
+  - name: mart_payer_analytics
+    description: "Payer-level KPIs and encounter mix by class."
+    columns:
+      - name: payer_id
+        tests: [unique, not_null]
+
+  - name: mart_chronic_condition_costs
+    description: "Cost burden aggregated per chronic condition cohort."
+    columns:
+      - name: condition
+        tests: [unique, not_null]
