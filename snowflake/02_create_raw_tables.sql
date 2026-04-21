@@ -1,6 +1,3 @@
--- Healthcare Claims Analytics - Raw table definitions
--- Creates 8 tables matching the Synthea CSV schemas.
--- Load CSVs into these tables via Snowflake UI (Load Data) after running this.
 
 USE ROLE ACCOUNTADMIN;
 USE DATABASE CLAIMS_DB;
