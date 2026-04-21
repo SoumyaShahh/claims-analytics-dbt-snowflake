@@ -1,5 +1,3 @@
--- Healthcare Claims Analytics - Snowflake infrastructure setup
--- Run as ACCOUNTADMIN. Idempotent (safe to re-run).
 
 USE ROLE ACCOUNTADMIN;
 
@@ -11,7 +9,7 @@ CREATE WAREHOUSE IF NOT EXISTS CLAIMS_WH
   INITIALLY_SUSPENDED = TRUE
   COMMENT = 'Warehouse for dbt transformations on healthcare claims data';
 
--- Database + schemas (medallion layering)
+
 CREATE DATABASE IF NOT EXISTS CLAIMS_DB
   COMMENT = 'Healthcare claims analytics — raw, staging, intermediate, marts';
 
@@ -20,7 +18,6 @@ CREATE SCHEMA IF NOT EXISTS CLAIMS_DB.STAGING      COMMENT = 'dbt staging views'
 CREATE SCHEMA IF NOT EXISTS CLAIMS_DB.INTERMEDIATE COMMENT = 'dbt intermediate models';
 CREATE SCHEMA IF NOT EXISTS CLAIMS_DB.MARTS        COMMENT = 'dbt marts — facts, dims, analytics';
 
--- Role for dbt
 CREATE ROLE IF NOT EXISTS DBT_ROLE COMMENT = 'Role used by dbt to build models';
 
 GRANT USAGE, OPERATE ON WAREHOUSE CLAIMS_WH TO ROLE DBT_ROLE;
@@ -32,7 +29,6 @@ GRANT ALL ON SCHEMA CLAIMS_DB.MARTS        TO ROLE DBT_ROLE;
 GRANT ALL ON ALL TABLES IN SCHEMA CLAIMS_DB.RAW    TO ROLE DBT_ROLE;
 GRANT ALL ON FUTURE TABLES IN SCHEMA CLAIMS_DB.RAW TO ROLE DBT_ROLE;
 
--- Service account for dbt (set a strong password before running)
 CREATE USER IF NOT EXISTS DBT_USER
   PASSWORD = '<<CHANGE_THIS_TO_A_STRONG_PASSWORD>>'
   LOGIN_NAME = 'DBT_USER'
