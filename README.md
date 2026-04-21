@@ -132,11 +132,9 @@ dbt docs serve
 
 ## Stuff I'd add next
 
-- Snapshots on the payer transitions table (good SCD Type 2 use case)
-- Incremental model for fct_claims once the dataset gets bigger
-- Tag the analytics marts as `exposures` for BI tools
-- Hook in Great Expectations for heavier data quality checks
-- Try the same pipeline with Databricks/Spark as a comparison
+- Incremental materialization on fct_claims once the dataset grows beyond what XSMALL can rebuild quickly
+- Snapshots on payer_transitions to track how member coverage changes over time
+- Exposures tagging downstream BI consumers so the lineage graph shows end-to-end
 
 ## Notes
 
