@@ -1,23 +1,19 @@
 {{ config(materialized='view') }}
 
-with source as (
+with src as (
     select * from {{ source('synthea_raw', 'raw_organizations') }}
-),
-
-renamed as (
-    select
-        id              as organization_id,
-        name            as organization_name,
-        address,
-        city,
-        state,
-        zip             as zip_code,
-        lat             as latitude,
-        lon             as longitude,
-        phone,
-        revenue         as total_revenue,
-        utilization     as total_utilization
-    from source
 )
 
-select * from renamed
+select
+    id              as organization_id,
+    name            as organization_name,
+    address,
+    city,
+    state,
+    zip             as zip_code,
+    lat             as latitude,
+    lon             as longitude,
+    phone,
+    revenue         as total_revenue,
+    utilization     as total_utilization
+from src

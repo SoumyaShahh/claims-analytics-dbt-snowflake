@@ -2,31 +2,26 @@ version: 2
 
 models:
   - name: dim_patients
-    description: "Patient dimension with demographics and chronic condition flags."
     columns:
       - name: patient_id
         tests: [unique, not_null]
 
   - name: dim_providers
-    description: "Provider dimension enriched with organization info."
     columns:
       - name: provider_id
         tests: [unique, not_null]
 
   - name: dim_payers
-    description: "Insurance payer dimension with coverage KPIs."
     columns:
       - name: payer_id
         tests: [unique, not_null]
 
   - name: dim_date
-    description: "Calendar dimension, daily grain, 2010-2030."
     columns:
       - name: date_key
         tests: [unique, not_null]
 
   - name: fct_claims
-    description: "Claims fact table — one row per claim, with cost and coverage measures."
     columns:
       - name: claim_id
         tests: [unique, not_null]
@@ -38,7 +33,6 @@ models:
               field: patient_id
 
   - name: fct_encounters
-    description: "Encounters fact table — one row per encounter."
     columns:
       - name: encounter_id
         tests: [unique, not_null]

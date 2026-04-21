@@ -2,7 +2,6 @@ version: 2
 
 sources:
   - name: synthea_raw
-    description: "Raw Synthea synthetic healthcare data loaded into Snowflake from CSV files."
     database: CLAIMS_DB
     schema: RAW
     tables:

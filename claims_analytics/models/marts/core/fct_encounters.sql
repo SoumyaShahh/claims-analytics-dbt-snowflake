@@ -1,6 +1,6 @@
 {{ config(materialized='table') }}
 
-with encounters as (
+with e as (
     select * from {{ ref('stg_encounters') }}
 )
 
@@ -22,4 +22,4 @@ select
     encounter_duration_minutes,
     reason_code,
     reason_description
-from encounters
+from e

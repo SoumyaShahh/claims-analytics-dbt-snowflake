@@ -209,3 +209,9 @@ __marimo__/
 # Synthea raw data — too large for git, regenerate from synthea.mitre.org
 data/
 
+
+Claims_Analytics_Project_Explainer.docx
+*.docx
+desktop.ini
+Thumbs.db
+

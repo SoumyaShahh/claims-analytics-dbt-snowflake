@@ -1,9 +1,6 @@
 {{ config(materialized='table') }}
 
--- Fact table: one row per claim, with FKs to dim_patients, dim_providers,
--- dim_payers, dim_date, plus measures from the intermediate join.
-
-with claims as (
+with c as (
     select * from {{ ref('int_claims_with_encounters') }}
 )
 
@@ -27,4 +24,4 @@ select
     payer_coverage_ratio,
     total_outstanding_amount,
     encounter_duration_minutes
-from claims
+from c

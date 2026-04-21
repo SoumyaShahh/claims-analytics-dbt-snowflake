@@ -2,10 +2,8 @@ version: 2
 
 models:
   - name: stg_patients
-    description: "Cleaned patient demographics. One row per patient."
     columns:
       - name: patient_id
-        description: "Primary key — unique patient identifier (UUID)."
         tests:
           - unique
           - not_null
@@ -15,13 +13,10 @@ models:
         tests:
           - accepted_values:
               values: ['M', 'F']
-      - name: age_years
-        description: "Age at death if deceased, otherwise current age."
       - name: is_alive
         tests: [not_null]
 
   - name: stg_encounters
-    description: "Cleaned healthcare encounters. One row per encounter."
     columns:
       - name: encounter_id
         tests:
@@ -33,15 +28,8 @@ models:
           - relationships:
               to: ref('stg_patients')
               field: patient_id
-      - name: encounter_class
-        description: "ambulatory, emergency, inpatient, outpatient, urgentcare, wellness, etc."
-      - name: total_claim_cost
-        description: "Total cost of the encounter in USD."
-      - name: payer_coverage_ratio
-        description: "Share of total cost covered by payer (0-1)."
 
   - name: stg_claims
-    description: "Cleaned insurance claims. One row per claim."
     columns:
       - name: claim_id
         tests:
@@ -53,14 +41,10 @@ models:
           - relationships:
               to: ref('stg_patients')
               field: patient_id
-      - name: total_outstanding_amount
-        description: "Sum of primary, secondary, and patient outstanding balances."
 
   - name: stg_conditions
-    description: "Cleaned diagnosed conditions per patient/encounter."
     columns:
       - name: condition_id
-        description: "Surrogate key (hash of patient + encounter + code + start)."
         tests:
           - unique
           - not_null
@@ -70,11 +54,8 @@ models:
           - relationships:
               to: ref('stg_patients')
               field: patient_id
-      - name: is_active
-        description: "True if condition has no end date."
 
   - name: stg_providers
-    description: "Cleaned individual healthcare providers."
     columns:
       - name: provider_id
         tests:
@@ -84,7 +65,6 @@ models:
         tests: [not_null]
 
   - name: stg_organizations
-    description: "Cleaned healthcare facilities."
     columns:
       - name: organization_id
         tests:
@@ -92,7 +72,6 @@ models:
           - not_null
 
   - name: stg_payers
-    description: "Cleaned insurance payer organizations."
     columns:
       - name: payer_id
         tests:
@@ -102,7 +81,6 @@ models:
         tests: [not_null]
 
   - name: stg_payer_transitions
-    description: "Cleaned insurance coverage history per patient."
     columns:
       - name: payer_transition_id
         tests:
